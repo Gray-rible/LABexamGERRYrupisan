@@ -1,0 +1,63 @@
+@page
+@model StudentsModel
+@{
+    ViewData["Title"] = "Student List";
+}
+
+<h1>Student List</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Full Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Students)
+        {
+            <tr>
+                <td>@student.StudentId</td>
+                <td>@student.FullName</td>
+                <td>
+                    @* Link to the individual student details page, passing the ID *@
+                    <a asp-page="/StudentDetail" asp-route-id="@student.StudentId" class="view-btn">VIEW</a>
+                </td>
+            </tr>
+        }
+        @if (!Model.Students.Any())
+        {
+            <tr>
+                <td colspan="3">No students found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* Basic styling similar to the PHP example - place in wwwroot/css/site.css or here *@
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+   .view-btn {
+        background-color:rgb(37, 93, 153);
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none; 
+        display: inline-block; 
+    }
+</style>
